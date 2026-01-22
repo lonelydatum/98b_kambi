@@ -1,0 +1,22 @@
+{
+  "name": "banner-build",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs",
+    "zip": "node scripts/zip-banners.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:banner": "node scripts/dev.mjs --banner"
+  },
+  "devDependencies": {
+    "archiver": "^7.0.1",
+    "browser-sync": "^3.0.4",
+    "chokidar": "^4.0.3",
+    "ejs": "^3.1.10",
+    "esbuild": "^0.25.0",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
+    "sass": "^1.77.8"
+  }
+}

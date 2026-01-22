@@ -1,0 +1,33 @@
+@import "./common.scss";
+
+#banner {
+  width: 320px;
+  height: 50px;
+}
+
+.legal {
+  // display: none;
+}
+
+#legalBtn {
+  @include pos(280, 0);
+  width: 40px;
+
+  // display: none;
+  // opacity: 1 !important;
+}
+
+#legalContent {
+  font-size: 8px;
+  line-height: 9px;
+  padding: 2px;
+  br {
+    display: none;
+  }
+}
+
+#olg {
+  width: 72px;
+  height: 47px;
+  @include pos(0, 11);
+}
