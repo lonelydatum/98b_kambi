@@ -1,5 +1,5 @@
 import { read, olg } from "../../_common/js/common.js";
-
+//garlo
 function init_nfl() {
   // document.getElementById("legalContent").innerHTML =
   //   "Individuals must be 19+, a resident of Ontario, and located in the province to participate in online PROLINE+ sports betting. Product is not exactly as shown.";
