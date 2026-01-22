@@ -18,11 +18,15 @@ const READ_ALL = {
 };
 
 const read = READ_ALL[universalBanner.name];
-const uyg = 1.5;
 const banner = document.getElementById("banner");
 
 const bannerSize = { w: banner.offsetWidth, h: banner.offsetHeight };
 const { w, h } = bannerSize;
+
+if (universalBanner.name === "nfl") {
+  document.getElementById("legalContent").innerHTML =
+    "Individuals must be 19+, a resident of Ontario, and located in the province to participate in online PROLINE+ sports betting. Product is not exactly as shown.";
+}
 
 function init() {
   const tl = new TimelineMax({

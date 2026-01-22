@@ -11,6 +11,8 @@ function init_nfl() {
     },
   });
 
+  //
+
   tl.set(".frame1", { opacity: 1 });
 
   tl.from(".phone_1", { opacity: 0, y: "+=80", duration: 0.4 }, "+=.2");

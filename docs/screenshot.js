@@ -197,12 +197,12 @@ export function makeScreenshotHandler({ iframe, getSelection }) {
         useCORS: true,
       });
 
-      const blob = await exportJpegUnderLimit(canvas, 50);
+      const blob = await exportJpegUnderLimit(canvas, 48);
       if (!blob) throw new Error("encode failed");
 
       const { w, h } = sizeFromType(item.type);
       const name = safeFilename(item.path || group.title || "banner");
-      const filename = `${name}_${w}x${h}.jpg`;
+      const filename = `${name}.jpg`;
 
       downloadBlob(blob, filename);
     } catch (e) {
