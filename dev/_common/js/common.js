@@ -1,5 +1,4 @@
 import { olg } from "./proline";
-import { origin } from "./helpers/helpers.js";
 
 gsap.defaults({
   ease: "power2.out",
@@ -145,4 +144,37 @@ function init_160x600() {
   return tl;
 }
 
-export { init, olg, bannerSize, read, init_320x50, init_728x90, init_160x600 };
+function init_970x250() {
+  const tl = new TimelineMax({
+    onComplete: () => {
+      if (document.getElementById("legalBtn")) {
+        TweenLite.set("#legalBtn", { display: "block" });
+      }
+    },
+  });
+
+  tl.set(".frame1", { opacity: 1 });
+  tl.from(".t1", { opacity: 0, duration: 0.3, y: "+=180" });
+  tl.from(".arrows", { opacity: 0, duration: 0.3 }, "+=2.7");
+
+  tl.from(".phone_1a", { opacity: 0, y: "+=80", duration: 0.3 }, "+=.3");
+
+  tl.from(".t2", { opacity: 0, duration: 0.3 }, "+=.3");
+
+  tl.to([".phone_1a", ".t2"], { opacity: 0, duration: 0.2 }, `+=2`);
+  tl.from(".phone_1b", { opacity: 0, y: "+=80", duration: 0.3 }, "+=.3");
+  tl.from(".t3", { opacity: 0, duration: 0.3 }, "+=.5");
+
+  tl.from(".end_arrows", { opacity: 0, duration: 0.3 }, "+=3");
+  tl.from(".phone_2", { opacity: 0, y: "+=80", duration: 0.3 }, "+=.3");
+
+  tl.from(".txt_dta", { opacity: 0, x: "-=40", duration: 0.3 });
+
+  tl.from([".playsmart", ".legal"], { opacity: 0, duration: 0.3 });
+
+  tl.add(olg());
+
+  return tl;
+}
+
+export { init, olg, bannerSize, read, init_320x50, init_728x90, init_160x600, init_970x250 };
