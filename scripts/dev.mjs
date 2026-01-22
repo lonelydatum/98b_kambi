@@ -131,12 +131,8 @@ bs.init({
         lastBanner = m[1];
       }
 
+      // Root: ALWAYS show list
       if (req.url === "/" || req.url === "/index.html") {
-        if (lastBanner) {
-          res.writeHead(302, { Location: `/${lastBanner}/` });
-          return res.end();
-        }
-
         const banners = listDevBanners();
         res.setHeader("Content-Type", "text/html; charset=utf-8");
         return res.end(bannerListHtml(banners));
