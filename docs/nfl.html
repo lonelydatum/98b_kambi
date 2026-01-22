@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta charset="utf-8" />
     <title></title>
-    <style>
-      a {
-        color: #aaa;
-      }
-    </style>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app"></div>
     <script>
       const SS = { type: "SS", title: "160x600" };
       const BB = { type: "BB", title: "300x250" };
@@ -21,7 +20,7 @@
       const M970x250 = { type: { w: 970, h: 250 }, title: "970x250" };
       const M1000x700 = { type: { w: 1000, h: 700 }, title: "1000x700" };
 
-      var data = {
+      window.data = {
         title: "PROLINE KAMBI",
         banners: [
           {
@@ -35,9 +34,6 @@
         ],
       };
     </script>
-  </head>
-  <body>
-    <script src="vendor.bundle.js"></script>
-    <script src="bundle.js"></script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>

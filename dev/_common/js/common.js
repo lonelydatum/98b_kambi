@@ -112,6 +112,8 @@ function init_320x50() {
 }
 
 function init_160x600() {
+  console.log("sldkfj");
+
   const tl = new TimelineMax({
     onComplete: () => {
       if (document.getElementById("legalBtn")) {
@@ -128,7 +130,7 @@ function init_160x600() {
 
   tl.from(".arrows", { opacity: 0, duration: 0.3 });
   tl.from([".t1"], { opacity: 0, duration: 0.3 }, "+=.3");
-  tl.from([".phone_1b"], { opacity: 0, duration: 0.3 }, "+=.3");
+  tl.from(".phone_1b", { opacity: 0, duration: 0.3 }, "+=.3");
   // tl.from(".t1", { opacity: 0, duration: 0.3 });
   tl.to(".t1", { opacity: 0, duration: 0.3 }, `+=${read.t1}`);
   tl.add("t2");
@@ -136,9 +138,10 @@ function init_160x600() {
   tl.to(".t2", { opacity: 0, duration: 0.3 }, `+=${read.t2}`);
 
   tl.add("end");
+  tl.to(".phone_1b", { opacity: 0, duration: 0.3 });
 
-  tl.from(".phone_2", { opacity: 0, duration: 0.3 }, "end+=.1");
-  tl.from(".txt_dta", { opacity: 0, duration: 0.3 }, "end+=.7");
+  tl.from(".phone_2", { opacity: 0, duration: 0.3 }, "+=.3");
+  tl.from(".txt_dta", { opacity: 0, duration: 0.3 }, "+=.5");
   tl.from([".playsmart", ".legal"], { opacity: 0, duration: 0.3 }, "end");
   tl.add(olg());
   return tl;
