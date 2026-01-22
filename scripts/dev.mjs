@@ -27,9 +27,11 @@ function runNode(root, scriptRel, extraArgs = []) {
   });
 }
 
-async function runBuildOnce({ root, banner }) {
+async function runBuildOnce({ root, banner, mode }) {
   await new Promise((resolve, reject) => {
-    const args = banner ? [`--banner=${banner}`] : [];
+    const args = [];
+    if (banner) args.push(`--banner=${banner}`);
+    if (mode) args.push(`--mode=${mode}`);
     const p = runNode(root, "scripts/build.mjs", args);
     p.on("exit", (code) => {
       if (code === 0) resolve();
@@ -49,7 +51,7 @@ console.log("[dev] devDir:", devDir);
 console.log("[dev] distDir:", distDir);
 
 // 1) initial build
-await runBuildOnce({ root, banner });
+await runBuildOnce({ root, banner, mode: "dev" });
 
 // 2) start BrowserSync (serves dist + live reload)
 const bs = browserSync.create();
@@ -116,7 +118,7 @@ function bannerListHtml(banners) {
 }
 
 bs.init({
-  server: { baseDir: distDir }, // keep serving dist banners
+  server: { baseDir: devDir }, // keep serving dist banners
   port: 3000,
   open: true,
   notify: false,
@@ -152,4 +154,63 @@ bs.init({
       return next();
     },
   ],
+});
+
+// 3) rebuild queue (debounced + no overlap)
+let timer = null;
+let building = false;
+let pending = false;
+
+async function rebuild() {
+  if (building) {
+    pending = true;
+    return;
+  }
+  building = true;
+
+  try {
+    await runBuildOnce({ root, banner });
+    console.log("[dev] build complete → reloading");
+    bs.reload();
+  } catch (err) {
+    console.error("[dev] build error:", err?.message || err);
+  }
+
+  building = false;
+  if (pending) {
+    pending = false;
+    rebuild();
+  }
+}
+
+// 4) watch dev directory
+const watcher = chokidar.watch(devDir, {
+  ignoreInitial: true,
+  persistent: true,
+  ignored: ["**/.DS_Store", "**/.git/**", "**/node_modules/**"],
+  usePolling: true, // macOS + network drives friendly
+  interval: 200,
+  awaitWriteFinish: { stabilityThreshold: 200, pollInterval: 50 },
+});
+
+watcher.once("ready", () => {
+  console.log("[dev] watcher ready — live rebuild enabled");
+});
+
+watcher.on("all", (event, file) => {
+  const ext = path.extname(file).toLowerCase();
+  const ok = [".ejs", ".scss", ".sass", ".js", ".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"].includes(ext);
+
+  if (!ok) return;
+
+  if (banner) {
+    const rel = path.relative(devDir, file).replace(/\\/g, "/");
+    const isCommon = rel.startsWith("_common/");
+    const isBanner = rel.startsWith(`${banner}/`);
+    if (!isCommon && !isBanner) return;
+  }
+
+  console.log(`[dev] ${event}: ${path.relative(root, file)}`);
+  clearTimeout(timer);
+  timer = setTimeout(() => rebuild(), 150);
 });

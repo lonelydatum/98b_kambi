@@ -21,7 +21,6 @@ const READ_ALL = {
 const read = READ_ALL[universalBanner.name];
 const uyg = 1.5;
 const banner = document.getElementById("banner");
-console.log(banner);
 
 const bannerSize = { w: banner.offsetWidth, h: banner.offsetHeight };
 const { w, h } = bannerSize;
