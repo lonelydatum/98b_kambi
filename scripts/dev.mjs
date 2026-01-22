@@ -118,7 +118,7 @@ function bannerListHtml(banners) {
 }
 
 bs.init({
-  server: { baseDir: devDir }, // keep serving dist banners
+  server: { baseDir: distDir }, // ✅ serve built output
   port: 3000,
   open: true,
   notify: false,
@@ -126,13 +126,11 @@ bs.init({
 
   middleware: [
     (req, res, next) => {
-      // Remember last visited banner
       const m = req.url.match(/^\/([^/]+)\//);
       if (m && m[1] && m[1] !== "browser-sync") {
         lastBanner = m[1];
       }
 
-      // Root: redirect to last banner (if any), otherwise show list
       if (req.url === "/" || req.url === "/index.html") {
         if (lastBanner) {
           res.writeHead(302, { Location: `/${lastBanner}/` });
@@ -144,7 +142,6 @@ bs.init({
         return res.end(bannerListHtml(banners));
       }
 
-      // /__banners: always show list (even if lastBanner is set)
       if (req.url === "/__banners" || req.url === "/__banners/") {
         const banners = listDevBanners();
         res.setHeader("Content-Type", "text/html; charset=utf-8");
@@ -169,7 +166,8 @@ async function rebuild() {
   building = true;
 
   try {
-    await runBuildOnce({ root, banner });
+    await runBuildOnce({ root, banner, mode: "dev" });
+
     console.log("[dev] build complete → reloading");
     bs.reload();
   } catch (err) {

@@ -68,26 +68,16 @@ function init_728x90() {
   tl.from(".phone_1a", { opacity: 0, y: "+=80", duration: 0.3 });
   tl.from(".t1", { opacity: 0, duration: 0.3 });
 
-  if (universalBanner.name === "playInStore") {
-    // tl.to([".t1"], {opacity:0, duration:.3}, `+=${read.t1}`)
-    // tl.from(".t2", {opacity:0, duration:.3}, "+=.3")
+  tl.to(".t1", { opacity: 0, duration: 0.3 }, `+=2.5`);
+  tl.from(".t2", { opacity: 0, duration: 0.3 }, "+=.3");
 
-    tl.to([".t1", ".phone_1a"], { opacity: 0, duration: 0.3 }, `+=${read.t1}`);
-    tl.add("t2");
-    tl.from(".phone_1b", { opacity: 0, duration: 0.3 }, "t2");
-    tl.from(".t2", { opacity: 0, duration: 0.3 }, "t2+=1");
-  } else {
-    tl.to(".t1", { opacity: 0, duration: 0.3 }, `+=${read.t1}`);
-    tl.from([".phone_1b", ".t2"], { opacity: 0, duration: 0.3 });
-  }
+  tl.to(".t2", { opacity: 0, duration: 0.3 }, `+=2`);
+  tl.from(".t3", { opacity: 0, duration: 0.3 }, "+=.3");
 
-  tl.from(".hero", { opacity: 0, duration: 0.5 }, `+=${read.t2}`);
-  tl.from(".txt_uyg", { opacity: 0, duration: 0.3 }, "+=.3");
+  tl.to(".t3", { opacity: 0, duration: 0.3 }, "+=3");
 
-  tl.from(".arrow_hero", { opacity: 0, duration: 0.6 }, `+=${uyg}`);
-
-  tl.from(".phone_2", { opacity: 0, y: "+=80", duration: 0.3 });
-  tl.from(".txt_dta", { opacity: 0, y: "+=40", duration: 0.3 });
+  tl.from(".txt_dta", { opacity: 0, x: "-=40", duration: 0.3 });
+  tl.from(".end_txt", { opacity: 0, duration: 0.3 }, "+=.3");
 
   tl.from([".playsmart", ".legal"], { opacity: 0, duration: 0.3 });
 
