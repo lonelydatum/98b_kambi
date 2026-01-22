@@ -10,7 +10,7 @@ function init_728x90() {
   });
 
   tl.set(".frame1", { opacity: 1 });
-  tl.from(".t1", { opacity: 0, duration: 0.3 }, `+=.3`);
+  tl.from(".t1", { opacity: 0, duration: 0.3, y: "+=50" }, `+=.3`);
   tl.from(".arrows", { opacity: 0, duration: 0.3, y: "+=20" }, `+=${read.t1}`);
 
   tl.from(".phone_1", { opacity: 0, y: "+=40", duration: 0.4 });
