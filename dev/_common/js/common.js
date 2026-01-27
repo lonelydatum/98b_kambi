@@ -6,7 +6,7 @@ gsap.defaults({
 
 const READ_PLAY_IN_STORE = { t0: 2.8, t1: 2, t2: 3.2 };
 const READ_PLUS_BETTING_EASIER = { t0: 3, t1: 2, t2: 3.2 };
-const EARLY_PAYOUT = { t1: 2, t2: 2.2 };
+const EARLY_PAYOUT = { t0: 2.5, t1: 2, t2: 2.5 };
 const PARLAY = { t1: 2, t2: 3.5 };
 
 const READ_ALL = {
@@ -23,7 +23,11 @@ const banner = document.getElementById("banner");
 const bannerSize = { w: banner.offsetWidth, h: banner.offsetHeight };
 const { w, h } = bannerSize;
 
-if (universalBanner.name === "nfl" || universalBanner.name === "plusBettingEasier") {
+if (
+  universalBanner.name === "nfl" ||
+  universalBanner.name === "plusBettingEasier" ||
+  universalBanner.name === "plusEarlyPayout"
+) {
   document.getElementById("legalContent").innerHTML =
     "Individuals must be 19+, a resident of Ontario, and located in the province to participate in online PROLINE+ sports betting. Product is not exactly as shown.";
 }
